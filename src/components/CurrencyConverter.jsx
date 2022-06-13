@@ -1,12 +1,18 @@
+import { useState } from 'react'
 import ExchangeRate from './ExchangeRate'
 
-const currencyConverter = () => {
+const CurrencyConverter = () => {
+  const currencies = ['BTC', 'ETH', 'USD', 'XRP', 'LTC', 'ADA']
+  const [chosenPrimaryCurrency, setChosenPrimaryCurrency] = useState('BTC')
+  const [chosenSecondaryCurrency, setChosenSecondaryCurrency] = useState('BTC')
+
+  console.log(chosenSecondaryCurrency);
   return (
     <div className="currency-converter">
       <h2>Currency Converter</h2>
       <div className="input-box">
         <table>
-          <body>
+          <tbody>
            <tr>
               <td>Primary Currency:</td>
                <td>
@@ -18,15 +24,36 @@ const currencyConverter = () => {
               </td>
               <td>
                 <select 
-                  value={""} 
+                  value={chosenPrimaryCurrency}
                   name="currency-option-1"
                   className="currency-options"
+                  onChange={(e) => setChosenPrimaryCurrency(e.target.value)}
                   >
-                    <option></option>
+                    {currencies.map((currency, _index) => (<option key={_index}>{currency}</option>))}
                   </select>
               </td>
-            </tr>  
-          </body>
+            </tr>
+            <tr>
+              <td>Secondary Currency:</td>
+               <td>
+                <input
+                  type="number"
+                  name="currency-amount-2"
+                  value={""}
+                />
+              </td>
+              <td>
+                <select 
+                  value={chosenSecondaryCurrency}
+                  name="currency-option-2"
+                  className="currency-options"
+                  onChange={(e) => setChosenSecondaryCurrency(e.target.value)}
+                  >
+                    {currencies.map((currency, _index) => (<option key={_index}>{currency}</option>))}
+                  </select>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
      
@@ -36,4 +63,4 @@ const currencyConverter = () => {
   )
 }
 
-export default currencyConverter
+export default CurrencyConverter
